@@ -50,12 +50,7 @@ const colors = [
   "#4B9CD3",
   "#034694",
 ];
-const mixedColors = [
-  "radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)",
-  "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)",
-  "linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)",
-  "linear-gradient(0deg, rgba(195,34,71,1) 0%, rgba(250,251,248,1) 100%)",
-];
+
 // 초기값 설정
 let currentItem = 0;
 
@@ -98,10 +93,18 @@ prevBtn.addEventListener("click", function () {
 
 // 아무거나 버튼 클릭했을 때 이벤트 효과
 randomBtn.addEventListener("click", function () {
-  const randomNumber = getRandomNumber();
-  document.body.style.background = mixedColors[randomNumber];
-
-  currentItem = Math.floor(Math.random() * reviews.length);
+  const color1 = getRandomColor();
+  const color2 = getRandomColor();
+  document.body.style.background = `linear-gradient(to right, ${color1}, ${color2})`;
+  function getRandomColor() {
+    // 16진수 색상 코드를 생성합니다.
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
   showPerson();
 });
 
